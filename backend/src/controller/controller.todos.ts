@@ -1,40 +1,51 @@
-import {NextFunction, Request, Response} from "express";
 import {controller, httpDelete, httpGet, httpPatch, httpPost, interfaces} from "inversify-express-utils";
-import {MIDDLEWARE_LOGGER, MIDDLEWARE_VALIDATOR, TODOS_SERVICE} from "../container";
-import {inject} from "inversify";
+import {container, MIDDLEWARE_LOGGER, MIDDLEWARE_VALIDATOR, TODOS_SERVICE} from "../container";
 import ServiceTodos from "../model/service/service.todos";
-import {Todo} from "../model/entity/todo";
+import RuntimeException from "../model/RuntimeException";
 
 
 @controller("/api/todos", MIDDLEWARE_LOGGER, MIDDLEWARE_VALIDATOR)
-export class ControllerUsers implements interfaces.Controller {
+export default class ControllerTodos implements interfaces.Controller {
 
-    constructor(@inject(TODOS_SERVICE) private serviceTodos: ServiceTodos) {
+    private serviceTodos: ServiceTodos
+
+    constructor() {
+        this.serviceTodos = container.get<ServiceTodos>(TODOS_SERVICE)
     }
 
     @httpGet("/:id")
-    one(req: Request, res: Response, next: NextFunction): Promise<Todo> {
+    one(req: any, res: any, next: any): Promise<void> {
         return this.serviceTodos.one(req.params.id)
+            .then(it => res.json(it))
+            .catch((it: RuntimeException) => res.status(it.code).end(it.msg))
     }
 
     @httpGet("/")
-    all(req: Request, res: Response, next: NextFunction): Promise<Todo[]> {
+    all(req: any, res: any, next: any): Promise<void> {
         return this.serviceTodos.all()
+            .then(it => res.json(it))
+            .catch((it: RuntimeException) => res.status(it.code).end(it.msg))
     }
 
     @httpPost("/")
-    add(req: Request, res: Response, next: NextFunction): Promise<Todo> {
+    add(req: any, res: any, next: any): Promise<void> {
         return this.serviceTodos.add(req.body)
+            .then(it => res.json(it))
+            .catch((it: RuntimeException) => res.status(it.code).end(it.msg));
     }
 
     @httpPatch("/:id")
-    update(req: Request, res: Response, next: NextFunction): Promise<Todo> {
+    update(req: any, res: any, next: any): Promise<void> {
         return this.serviceTodos.update(req.params.id, req.body)
+            .then(it => res.json(it))
+            .catch((it: RuntimeException) => res.status(it.code).end(it.msg));
     }
 
     @httpDelete("/:id")
-    delete(req: Request, res: Response, next: NextFunction): Promise<Todo> {
+    delete(req: any, res: any, next: any): Promise<void> {
         return this.serviceTodos.delete(req.params.id)
+            .then(it => res.json(it))
+            .catch((it: RuntimeException) => res.status(it.code).end(it.msg));
     }
 
 }

@@ -1,15 +1,19 @@
-import {Todo} from "../entity/todo";
+import {Todo} from "../entity/Todo";
 
 export default interface RepositoryTodos {
 
-    one(id): Promise<Todo>
+    one(id): Todo
 
-    all(): Promise<Todo[]>
+    all(): Todo[]
 
-    add(todo): Promise<Todo>
+    add(todo): Todo
 
-    update(id, todo): Promise<Todo>
+    update(id, todo): Todo
 
-    delete(id): Promise<Todo>
+    delete(id): Todo
+
+    hasId(id): boolean
+
+    size(): number
 
 }
