@@ -1,13 +1,16 @@
 import 'reflect-metadata';
-import {Container} from "inversify";
 
 import {InversifyExpressServer} from 'inversify-express-utils';
 
 import * as bodyParser from 'body-parser';
 
+import './controller/controller.todos';
+
 import {Application} from "express";
 
-const server = new InversifyExpressServer(new Container());
+import {container} from './container'
+
+const server = new InversifyExpressServer(container);
 
 server.setConfig((app: Application) => {
     app.use(bodyParser.json());
