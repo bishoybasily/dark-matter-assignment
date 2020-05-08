@@ -3,6 +3,7 @@ import {controller, httpDelete, httpGet, httpPatch, httpPost, interfaces} from "
 import {MIDDLEWARE_LOGGER, MIDDLEWARE_VALIDATOR, TODOS_SERVICE} from "../container";
 import {inject} from "inversify";
 import ServiceTodos from "../model/service/service.todos";
+import {Todo} from "../model/entity/todo";
 
 
 @controller("/api/todos", MIDDLEWARE_LOGGER, MIDDLEWARE_VALIDATOR)
@@ -12,27 +13,27 @@ export class ControllerUsers implements interfaces.Controller {
     }
 
     @httpGet("/:id")
-    one(req: Request, res: Response, next: NextFunction) {
+    one(req: Request, res: Response, next: NextFunction): Promise<Todo> {
         return this.serviceTodos.one(req.params.id)
     }
 
     @httpGet("/")
-    all(req: Request, res: Response, next: NextFunction) {
+    all(req: Request, res: Response, next: NextFunction): Promise<Todo[]> {
         return this.serviceTodos.all()
     }
 
     @httpPost("/")
-    add(req: Request, res: Response, next: NextFunction) {
+    add(req: Request, res: Response, next: NextFunction): Promise<Todo> {
         return this.serviceTodos.add(req.body)
     }
 
     @httpPatch("/:id")
-    update(req: Request, res: Response, next: NextFunction) {
+    update(req: Request, res: Response, next: NextFunction): Promise<Todo> {
         return this.serviceTodos.update(req.params.id, req.body)
     }
 
     @httpDelete("/:id")
-    delete(req: Request, res: Response, next: NextFunction) {
+    delete(req: Request, res: Response, next: NextFunction): Promise<Todo> {
         return this.serviceTodos.delete(req.params.id)
     }
 
