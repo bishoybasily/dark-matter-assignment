@@ -19,7 +19,7 @@ server.setConfig((app: Application) => {
 
 const application = server.build();
 
-const PORT: number = Number.parseInt(process.env.PORT) || 3000;
+const PORT: number = Number.parseInt(process.env.PORT) || 5000;
 
 application.listen(PORT, () => console.log('Running on port: ' + PORT));
 
