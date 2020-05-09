@@ -1,10 +1,10 @@
 import {controller, httpDelete, httpGet, httpPatch, httpPost, interfaces} from "inversify-express-utils";
-import {container, MIDDLEWARE_LOGGER, MIDDLEWARE_VALIDATOR, TODOS_SERVICE} from "../container";
+import {container, MIDDLEWARE_CORS, MIDDLEWARE_LOGGER, MIDDLEWARE_VALIDATOR, TODOS_SERVICE} from "../container";
 import ServiceTodos from "../model/service/service.todos";
 import RuntimeException from "../model/RuntimeException";
 
 
-@controller("/api/todos", MIDDLEWARE_LOGGER, MIDDLEWARE_VALIDATOR)
+@controller("/api/todos", MIDDLEWARE_LOGGER, MIDDLEWARE_VALIDATOR, MIDDLEWARE_CORS)
 export default class ControllerTodos implements interfaces.Controller {
 
     private serviceTodos: ServiceTodos

@@ -1,4 +1,4 @@
 import {createStore} from "redux";
-import {todosReducer} from "./reducers";
+import {reducer} from "./reducers";
 
-export default createStore(todosReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+export default createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

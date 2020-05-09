@@ -61,7 +61,7 @@ export default class Todos extends Component {
     }
 
     getTodos() {
-        return store.getState().map(it => {
+        return store.getState().todos.map(it => {
             return {
                 ...it,
                 done: it.done ? "Yes" : "Not yet",
@@ -80,7 +80,7 @@ export default class Todos extends Component {
 
     markAllDone(ids) {
         ids.map(it => this.state.todos.filter(todo => todo.id === it)[0]).forEach(it => {
-            actions.updateTodo(it.id, it.title, it.description, it, true);
+            actions.updateTodo(it.id, it.title, it.description, true);
         });
     }
 

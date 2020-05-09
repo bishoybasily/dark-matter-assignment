@@ -27,28 +27,28 @@ export default class RepositoryTodosMemoryImpl implements RepositoryTodos {
     }
 
     update(id, todo): Todo {
+        let byId = this.getById(id);
         todo.id = Number.parseInt(id);
-        this.todos[id] = todo;
-        return this.todos[id];
-    }
-
-    delete(id): Todo {
-        let todo = this.todos[id];
-        this.todos.splice(id, 1);
+        this.todos[this.todos.indexOf(byId)] = todo;
         return todo;
     }
 
+    delete(id): Todo {
+        let byId = this.getById(id);
+        this.todos.splice(this.todos.indexOf(byId), 1);
+        return byId;
+    }
+
     hasId(id): boolean {
-        try {
-            let it = Number.parseInt(id);
-            return it >= 0 && it < this.todos.length
-        } catch (e) {
-            return false;
-        }
+        return this.todos.filter(it => it.id.toString() === id.toString()).length === 1
     }
 
     size(): number {
         return this.todos.length
+    }
+
+    private getById(id): Todo {
+        return this.todos.filter(it => it.id.toString() === id.toString())[0]
     }
 
 

@@ -10,7 +10,7 @@ export default class UpdateTodo extends BaseTodoComponent {
     constructor(props) {
         super(props);
         this.state = {
-            todo: store.getState().filter(it => it.id.toString() === props.match.params.id.toString())[0],
+            todo: store.getState().todos.filter(it => it.id.toString() === props.match.params.id.toString())[0],
             valid: false
         }
     }

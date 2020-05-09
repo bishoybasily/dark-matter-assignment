@@ -5,8 +5,9 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import * as actions from "./redux/actions";
 
-actions.createTodo("Learn react", new Date(), "Some description text");
-actions.createTodo("Submit dark-matter assignment", new Date(), "Some description text");
+const BASE_URL = process.env.BASE_URL || "http://localhost:5000/";
+
+actions.initializeTodos();
 
 ReactDOM.render(
     <React.StrictMode>
@@ -19,3 +20,5 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+export {BASE_URL}

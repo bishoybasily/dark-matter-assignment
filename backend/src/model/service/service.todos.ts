@@ -74,12 +74,12 @@ export default class ServiceTodos {
             let title = todo.title;
             let description = todo.description;
             let done = todo.done;
-            if (title !== undefined || title === '' || description === undefined || description === '' || done === undefined) {
+            if (title === undefined || title === '' || description === undefined || description === '' || done === undefined) {
                 reject(RuntimeException.from(400, "bad request"));
                 return;
             }
 
-            resolve(this.repositoryTodos.add(this.repositoryTodos.update(id, todo)))
+            resolve(this.repositoryTodos.update(id, todo))
 
         });
     }

@@ -4,7 +4,7 @@ export default class BaseTodoComponent extends Component {
 
     fieldsAreValid() {
         let todo = this.getTodo();
-        return this.fieldIsValid(todo.title) === this.fieldIsValid(todo.description) === this.fieldIsValid(todo.time);
+        return this.fieldIsValid(todo.title) === this.fieldIsValid(todo.description);
     }
 
     fieldIsValid(field) {
