@@ -15,8 +15,6 @@ const middlewareLogger = (req: any, res: any, next: NextFunction) => {
         console.log('Saved!');
     });
 
-    console.log(request)
-
     next();
 
 };
